@@ -89,8 +89,13 @@ async function fileExists(url) {
 
 async function resolveRom(game, localPath) {
   const local = localPath || game.rom;
-  if (local && await fileExists(local)) return local;
-  if (game.cdn && await fileExists(game.cdn)) return game.cdn;
+  /* Папку roms/ могли выложить как есть или вложить ещё на уровень
+     (так бывает, когда в загрузчик перетаскивают папку целиком).
+     Проверяем оба варианта, и только потом уходим на CDN. */
+  const candidates = [local, local && "roms/" + local, game.cdn].filter(Boolean);
+  for (const url of candidates) {
+    if (await fileExists(url)) return url;
+  }
   return null;
 }
 

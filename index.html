@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мега Драйв II — полка картриджей</title>
+<meta name="description" content="Каталог 144 игр Sega Mega Drive II и рабочий эмулятор в браузере. Homebrew-картриджи запускаются сразу, свои — перетаскиванием.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Press+Start+2P&family=Russo+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/crt.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2317191d'/%3E%3Crect x='5' y='9' width='22' height='15' rx='2' fill='%238ef7c4'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="masthead shell">
+  <h1 class="wordmark">
+    <span class="wordmark-top">Мега Драйв</span>
+    <span class="wordmark-bottom">16-BIT · II</span>
+  </h1>
+  <p class="tagline">
+    Полка с картриджами и телевизор, который их показывает.
+    Сто сорок четыре игры, семь запускаются прямо сейчас.
+  </p>
+</header>
+
+<main>
+  <section class="theatre" aria-label="Телевизор">
+    <div class="tv" id="tv">
+      <div class="tv-glow" aria-hidden="true"></div>
+
+      <div class="screen" id="screen">
+        <div class="screen-content" id="screenContent">
+
+          <div class="view-idle" id="viewIdle">
+            <div class="idle-bars" id="idleBars" aria-hidden="true"></div>
+            <p class="idle-title">НЕТ СИГНАЛА</p>
+            <p class="idle-hint">Выберите картридж на полке ниже</p>
+          </div>
+
+          <div class="screen-view view-detail" id="viewDetail"></div>
+          <div class="screen-view view-game" id="viewGame"></div>
+
+        </div>
+
+        <div class="screen-fx" aria-hidden="true">
+          <div class="fx-noise"></div>
+          <div class="fx-roll"></div>
+          <div class="fx-mask"></div>
+          <div class="fx-scan"></div>
+          <div class="fx-glass"></div>
+        </div>
+
+        <p class="channel-badge" id="channel" aria-hidden="true">CH 00</p>
+      </div>
+
+      <div class="tv-panel">
+        <span class="tv-brand" aria-hidden="true">МЕГА<b>ВИЗОР</b> 21"</span>
+        <div class="tv-speaker" aria-hidden="true"></div>
+        <div class="tv-knob" aria-hidden="true"></div>
+        <div class="tv-knob" aria-hidden="true"></div>
+        <span class="tv-led" aria-hidden="true"></span>
+        <button class="tv-power" id="power" type="button" aria-pressed="false">
+          <span aria-hidden="true">⏻</span>
+          <span class="visually-hidden">Включить или выключить телевизор</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="shelf">
+      <span class="slot-label">Слот</span>
+      <span class="slot-title" id="slotTitle" data-empty="true">слот пуст</span>
+      <button class="btn" id="btnLoad" type="button">Свой картридж</button>
+      <button class="btn btn-red" id="btnEject" type="button" disabled>Извлечь</button>
+      <input type="file" id="fileInput" class="visually-hidden" accept=".md,.bin,.gen,.smd,.68k,.sgd,.zip">
+    </div>
+
+    <p class="dropzone" id="dropzone">
+      Перетащите сюда <strong>свой файл ROM</strong> — .md, .bin, .gen, .smd или .zip.
+      Файл никуда не отправляется: он открывается прямо в браузере.
+    </p>
+  </section>
+
+  <section class="catalog shell" aria-label="Каталог игр">
+    <div class="section-head">
+      <h2 class="section-title">Полка</h2>
+      <span class="section-count" id="resultCount"></span>
+    </div>
+
+    <div class="filters">
+      <div class="filter-row">
+        <label class="visually-hidden" for="search">Поиск по каталогу</label>
+        <input class="search" id="search" type="search" placeholder="Название, студия, издатель, год…" autocomplete="off">
+      </div>
+      <div class="filter-row" id="chips"></div>
+    </div>
+
+    <ul class="grid" id="grid"></ul>
+  </section>
+
+  <section class="guide shell" id="guide" aria-label="Где взять игры">
+    <div class="section-head">
+      <h2 class="section-title">Где взять игры</h2>
+      <span class="section-count">и как их сюда загрузить</span>
+    </div>
+
+    <div class="guide-grid">
+      <article class="guide-card">
+        <h3 class="guide-title">Бесплатно и легально</h3>
+        <p>Homebrew — новые игры, которые энтузиасты пишут под Mega Drive до сих пор. Авторы раздают их сами.</p>
+        <ul class="guide-links">
+          <li><a href="https://itch.io/games/tag-sega-genesis" target="_blank" rel="noopener">itch.io</a> — сотни игр, много бесплатных</li>
+          <li><a href="https://github.com/topics/segagenesis" target="_blank" rel="noopener">GitHub</a> — исходники и готовые ROM в разделе Releases</li>
+          <li><a href="https://megacatstudios.com/collections/sega-genesis" target="_blank" rel="noopener">Mega Cat Studios</a> — новые игры на настоящих картриджах</li>
+          <li><a href="https://www.romhacking.net/homebrew/" target="_blank" rel="noopener">RomHacking.net</a> — раздел homebrew</li>
+        </ul>
+      </article>
+
+      <article class="guide-card">
+        <h3 class="guide-title">Классика — официально</h3>
+        <p>Старые хиты продаются переизданиями. Играть в них здесь не выйдет, но это честный способ их получить.</p>
+        <ul class="guide-links">
+          <li><a href="https://store.steampowered.com/app/34270/" target="_blank" rel="noopener">SEGA Mega Drive &amp; Genesis Classics</a> — более 50 игр в Steam</li>
+          <li><a href="https://www.nintendo.com/us/switch/online/" target="_blank" rel="noopener">Nintendo Switch Online</a> — пакет Sega Genesis по подписке</li>
+          <li><a href="https://www.antstream.com/" target="_blank" rel="noopener">Antstream Arcade</a> — ретро-игры по подписке</li>
+        </ul>
+      </article>
+
+      <article class="guide-card">
+        <h3 class="guide-title">Свой картридж</h3>
+        <p>Если картридж лежит дома, его содержимое можно считать самому — это законно для личной копии.</p>
+        <ul class="guide-links">
+          <li><a href="https://github.com/sanni/cartreader" target="_blank" rel="noopener">Sanni Cart Reader</a> — открытый дампер, собирается самостоятельно</li>
+          <li>Retrode 2 — готовое устройство, читает картриджи как флешку</li>
+        </ul>
+        <p class="guide-warn">Ссылок на пиратские ROM-сайты здесь нет и не будет.</p>
+      </article>
+    </div>
+
+    <ol class="guide-steps">
+      <li><b>Скачайте файл</b> с расширением <code>.md</code>, <code>.bin</code>, <code>.gen</code>, <code>.smd</code> или <code>.zip</code>.</li>
+      <li><b>Перетащите его</b> в любое место этой страницы — или нажмите «Свой картридж» под телевизором.</li>
+      <li><b>Играйте.</b> Управление и сохранения — в меню эмулятора, кнопка в правом нижнем углу экрана.</li>
+    </ol>
+
+    <p class="guide-privacy">
+      Файл никуда не загружается. Он открывается прямо в вашем браузере и исчезает,
+      как только вы закроете вкладку.
+    </p>
+  </section>
+</main>
+
+<footer class="colophon shell">
+  <h2>Откуда взялись картриджи</h2>
+  <p>
+    Классические игры здесь только описаны: их ROM защищены авторским правом и в комплект не входят.
+    Запускаются семь свободно распространяемых картриджей — авторы сами выложили их в открытый доступ:
+  </p>
+  <ul>
+    <li><a href="https://github.com/andwn/cave-story-md">Cave Story MD</a> — порт andwn, оригинал Pixel</li>
+    <li><a href="https://github.com/ResistanceVault/demo-Masiaka">Masiaka</a> — демо группы Resistance</li>
+    <li><a href="https://github.com/kikutano/Mega-Tetris-for-SEGA-Genesis">Mega Tetris</a> — kikutano</li>
+    <li><a href="https://github.com/SegaMark7/Casanova-love-mission">Casanova: Love Mission</a> — SegaMark7</li>
+    <li><a href="https://github.com/alicesim1/Penguin-World">Penguin World</a> — alicesim1</li>
+    <li><a href="https://github.com/Nightwolf-47/KleleAtoms-MD">KleleAtoms</a> — Nightwolf-47, лицензия MIT</li>
+    <li><a href="https://github.com/atamurad/sega-2048">Sega 2048</a> — atamurad</li>
+  </ul>
+  <p>
+    Эмуляция — <a href="https://emulatorjs.org/">EmulatorJS</a> с ядром genesis_plus_gx.
+    Обложки нарисованы кодом: настоящих скриншотов игр на странице нет, каждая картинка
+    генерируется из названия и жанра.
+  </p>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/catalog.js"></script>
+<script src="assets/js/art.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,643 @@
+/* ============================================================
+   Страница: тёмная комната, в которой стоит телевизор.
+   Правило типографики: всё, что «на экране» — пиксельный шрифт,
+   всё, что «в комнате» — печатный. Смешивать нельзя.
+   ============================================================ */
+
+:root {
+  --void: #05070a;
+  --room: #0b0d11;
+  --case: #17191d;
+  --case-lit: #33373d;
+  --phos: #8ef7c4;
+  --red: #ff2f38;
+  --blue: #2f6fe4;
+  --amber: #ffb020;
+  --paper: #e7e9ee;
+  --muted: #8a93a0;
+
+  /* Обязательное требование: кириллица в самом шрифте, а не в фолбэке. */
+  --font-display: "Russo One", "Impact", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-screen: "Press Start 2P", "Courier New", monospace;
+
+  --shell: min(100% - 2.4rem, 76rem);
+  --tv-w: min(100% - 2.4rem, 46rem, calc(104vh - 90px));
+
+  --noise-tex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--room);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Тёмная комната: свет падает сверху и от телевизора */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 60% at 50% -10%, #1a1f27 0%, transparent 60%),
+    radial-gradient(70% 50% at 50% 110%, #12161c 0%, transparent 70%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.28;
+  background-image: var(--noise-tex);
+  background-size: 200px 200px;
+}
+
+.shell { width: var(--shell); margin-inline: auto; }
+
+:where(a) { color: var(--phos); }
+
+:where(a, button, input, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --- Шапка -------------------------------------------------- */
+
+.masthead {
+  padding: clamp(1.4rem, 4vw, 3rem) 0 clamp(1.2rem, 2.5vw, 2rem);
+  text-align: center;
+}
+
+.wordmark {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  transform: skewX(-11deg);
+}
+
+.wordmark-top {
+  display: block;
+  font-size: clamp(2rem, 8.4vw, 5rem);
+  color: var(--paper);
+  text-shadow:
+    -2px 0 var(--red),
+    2px 0 var(--blue),
+    0 0.5rem 2rem rgb(0 0 0 / 0.9);
+}
+
+.wordmark-bottom {
+  display: inline-block;
+  margin-top: 0.35em;
+  padding: 0.12em 0.5em 0.06em;
+  font-size: clamp(0.85rem, 3.2vw, 1.6rem);
+  letter-spacing: 0.3em;
+  color: #fff;
+  background: var(--red);
+  box-shadow: 0 0.4rem 1.4rem rgb(255 47 56 / 0.35);
+}
+
+.tagline {
+  max-width: 44ch;
+  margin: 1.6rem auto 0;
+  transform: none;
+  color: var(--muted);
+  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+}
+
+/* --- Зона телевизора ---------------------------------------- */
+
+.theatre {
+  position: relative;
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+/* Полка под телевизором со слотом картриджа */
+.shelf {
+  width: var(--tv-w);
+  margin: -0.6rem auto 0;
+  padding: 1.1rem 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.4rem;
+  border-radius: 0 0 1rem 1rem;
+  background: linear-gradient(180deg, #101317, #0a0c0f);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05), 0 1.2rem 2.4rem rgb(0 0 0 / 0.6);
+}
+
+.slot-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.slot-title {
+  flex: 1 1 12rem;
+  min-width: 0;
+  font-weight: 600;
+  color: var(--paper);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slot-title[data-empty="true"] { color: var(--muted); font-weight: 400; }
+
+/* --- Кнопки в стиле корпуса приставки ------------------------ */
+
+.btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.62rem 1.1rem;
+  border-radius: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: linear-gradient(180deg, #2b3038, #171a1f);
+  box-shadow: 0 3px 0 #08090c, inset 0 1px 0 rgb(255 255 255 / 0.12);
+  transition: transform 90ms ease, box-shadow 90ms ease, background 160ms ease;
+}
+
+.btn:hover { background: linear-gradient(180deg, #343a44, #1c2026); }
+.btn:active { transform: translateY(3px); box-shadow: 0 0 0 #08090c, inset 0 2px 4px rgb(0 0 0 / 0.7); }
+.btn[disabled] { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-red {
+  color: #fff;
+  background: linear-gradient(180deg, #ff4a52, #c8161d);
+  box-shadow: 0 3px 0 #6d0a0e, inset 0 1px 0 rgb(255 255 255 / 0.28);
+}
+.btn-red:hover { background: linear-gradient(180deg, #ff6169, #d81c24); }
+.btn-red:active { box-shadow: 0 0 0 #6d0a0e, inset 0 2px 4px rgb(0 0 0 / 0.4); }
+
+/* --- Каталог ------------------------------------------------ */
+
+.catalog { padding: clamp(2.5rem, 6vw, 5rem) 0 4rem; }
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 3px solid #1e2229;
+}
+
+.section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transform: skewX(-8deg);
+}
+
+.section-count {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Панель фильтров — как ряд переключателей на корпусе */
+.filters {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  background: linear-gradient(180deg, #14171c, #0d0f13);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search {
+  flex: 1 1 16rem;
+  min-width: 0;
+  padding: 0.7rem 0.95rem;
+  border: 2px solid #262b33;
+  border-radius: 0.35rem;
+  background: #06080b;
+  color: var(--phos);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+}
+
+.search::placeholder { color: #4a525d; }
+.search:focus { border-color: var(--phos); }
+
+.chip {
+  appearance: none;
+  cursor: pointer;
+  padding: 0.42rem 0.8rem;
+  border: 2px solid #262b33;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.chip:hover { color: var(--paper); border-color: #3c434e; }
+
+.chip[aria-pressed="true"] {
+  color: #06080b;
+  background: var(--phos);
+  border-color: var(--phos);
+}
+
+/* --- Сетка картриджей --------------------------------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.grid > li { display: flex; }
+
+.cart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 0.55rem 0.55rem 0.3rem 0.3rem;
+  background: linear-gradient(175deg, #22262c 0%, #14171b 12%, #0e1114 100%);
+  box-shadow: 0 0.7rem 1.4rem rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 180ms ease;
+  color: inherit;
+  font: inherit;
+}
+
+/* насечки для пальцев на верхней кромке картриджа */
+.cart::before {
+  content: "";
+  position: absolute;
+  inset: 0.3rem 0.6rem auto;
+  height: 0.34rem;
+  border-radius: 2px;
+  background-image: repeating-linear-gradient(90deg, #0a0c0f 0 2px, transparent 2px 5px);
+  opacity: 0.8;
+}
+
+.cart:hover,
+.cart:focus-visible {
+  transform: translateY(-0.6rem);
+  box-shadow: 0 1.4rem 2.4rem rgb(0 0 0 / 0.7), inset 0 1px 0 rgb(255 255 255 / 0.14);
+}
+
+.cart-label {
+  margin: 1.05rem 0.7rem 0;
+  border-radius: 0.2rem;
+  overflow: hidden;
+  background: #000;
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.1);
+}
+
+.cart-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  image-rendering: pixelated;
+}
+
+.cart-body { margin-top: auto; padding: 0.75rem 0.85rem 0.95rem; }
+
+.cart-title {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--paper);
+  /* длинные названия не должны ломать сетку */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cart-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cart-genre { color: var(--genre-color, var(--muted)); }
+
+/* Наклейка «играется» на homebrew-картриджах */
+.cart-playable {
+  position: absolute;
+  top: 1.3rem;
+  right: -0.35rem;
+  z-index: 2;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #fff;
+  background: var(--red);
+  box-shadow: 0 0.3rem 0.7rem rgb(0 0 0 / 0.6);
+}
+
+.cart-hit {
+  position: absolute;
+  top: 1.3rem;
+  left: -0.35rem;
+  z-index: 2;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #06080b;
+  background: var(--amber);
+}
+
+.empty-note {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* --- Карточка игры на экране телевизора ---------------------- */
+
+.view-detail {
+  padding: 6% 7%;
+  overflow-y: auto;
+  font-size: clamp(0.42rem, 1.1vw, 0.6rem);
+  line-height: 2.1;
+}
+
+.detail-title {
+  margin: 0 0 1.4em;
+  font-size: clamp(0.62rem, 1.9vw, 1rem);
+  line-height: 1.6;
+  color: #fff;
+}
+
+.detail-rows {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5em 1.2em;
+  margin: 0 0 1.6em;
+}
+
+.detail-rows dt { color: rgb(255 255 255 / 0.62); text-shadow: none; }
+.detail-rows dd { margin: 0; color: var(--phos); }
+
+.detail-text {
+  margin: 0 0 1.8em;
+  color: rgb(255 255 255 / 0.95);
+  text-shadow: none;
+  line-height: 2.3;
+}
+
+.detail-actions { display: flex; flex-wrap: wrap; gap: 0.8em; }
+
+.screen-btn {
+  appearance: none;
+  cursor: pointer;
+  padding: 0.9em 1.2em;
+  border: 2px solid var(--phos);
+  background: transparent;
+  color: var(--phos);
+  font-family: var(--font-screen);
+  font-size: 1em;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  transition: background 140ms ease, color 140ms ease;
+}
+
+.screen-btn:hover { background: var(--phos); color: #04140c; }
+
+.screen-btn-primary {
+  border-color: var(--red);
+  color: #fff;
+  background: var(--red);
+}
+.screen-btn-primary:hover { background: #fff; color: var(--red); }
+
+.detail-note {
+  margin-top: 1.6em;
+  color: rgb(255 255 255 / 0.55);
+  text-shadow: none;
+  line-height: 2.2;
+}
+
+/* --- Слой эмулятора ----------------------------------------- */
+
+.view-game { background: #000; }
+.view-game > div { width: 100%; height: 100%; }
+
+/* Зона перетаскивания своего картриджа */
+.dropzone {
+  margin: 2rem auto 0;
+  padding: 1.4rem 1.5rem;
+  width: var(--tv-w);
+  border: 2px dashed #2c323b;
+  border-radius: 0.8rem;
+  text-align: center;
+  color: var(--muted);
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.dropzone.is-hot {
+  border-color: var(--phos);
+  background: rgb(142 247 196 / 0.06);
+  color: var(--phos);
+}
+
+.dropzone strong { color: var(--paper); }
+
+/* --- Подвал ------------------------------------------------- */
+
+.colophon {
+  padding: 3rem 0 4rem;
+  border-top: 3px solid #1e2229;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.colophon h2 {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--paper);
+  transform: skewX(-8deg);
+}
+
+.colophon p { margin: 0 0 1rem; max-width: 68ch; }
+.colophon ul { margin: 0; padding-left: 1.2rem; }
+.colophon li { margin-bottom: 0.3rem; }
+
+/* --- Адаптив ------------------------------------------------ */
+
+@media (max-width: 40rem) {
+  .tv { padding: 1.1rem 1.1rem 0.8rem; border-radius: 1.2rem; }
+  .screen { box-shadow: inset 0 0 0 2px #05060a, inset 0 0 1.6rem 0.7rem rgb(0 0 0 / 0.95), 0 0 0 0.4rem #101317, 0 0 0 0.55rem #292d33; }
+  .tv-knob, .tv-brand { display: none; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); }
+  .shelf { border-radius: 0 0 0.6rem 0.6rem; }
+  /* на узком экране кнопки должны делить одну строку, а не вставать столбиком */
+  .shelf .btn { flex: 1 1 8rem; justify-content: center; }
+  .slot-title { flex-basis: 100%; }
+}
+
+/* --- Где взять игры ----------------------------------------- */
+
+.guide { padding: clamp(2rem, 5vw, 4rem) 0 1rem; }
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.guide-card {
+  padding: 1.4rem 1.5rem;
+  border-radius: 0.7rem;
+  background: linear-gradient(180deg, #14171c, #0d0f13);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.05);
+}
+
+.guide-title {
+  margin: 0 0 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--phos);
+}
+
+.guide-card p { margin: 0 0 0.9rem; color: var(--muted); font-size: 0.9rem; }
+
+.guide-links { margin: 0; padding-left: 1.1rem; font-size: 0.88rem; color: var(--muted); }
+.guide-links li { margin-bottom: 0.45rem; }
+
+.guide-warn {
+  margin-top: 1rem !important;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgb(255 255 255 / 0.07);
+  font-size: 0.8rem !important;
+  color: #6d7683 !important;
+}
+
+.guide-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.guide-steps li {
+  position: relative;
+  padding: 1.1rem 1.2rem 1.1rem 3.2rem;
+  border-radius: 0.5rem;
+  background: #101318;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Нумерация здесь несёт смысл: это последовательность, а не украшение. */
+.guide-steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 1.1rem;
+  top: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.guide-steps b { color: var(--paper); }
+
+.guide-steps code {
+  padding: 0.05em 0.35em;
+  border-radius: 0.2rem;
+  background: #06080b;
+  color: var(--phos);
+  font-size: 0.85em;
+}
+
+.guide-privacy {
+  margin: 0;
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--phos);
+  background: rgb(142 247 196 / 0.05);
+  color: var(--paper);
+  font-size: 0.9rem;
+}
+
+/* Ссылка, которая выглядит и работает как экранная кнопка */
+a.screen-btn { display: inline-block; text-decoration: none; }

@@ -376,3 +376,14 @@ showView(viewIdle);
 
 // Телевизор «прогревается» после загрузки страницы.
 window.setTimeout(() => setPower(true), prefersReducedMotion() ? 0 : 700);
+
+/* Кнопки каналов на корпусе — переключают индикатор.
+   ponytail: декоративные, привязать к выбору картриджа, если понадобится. */
+el("channels").addEventListener("click", (e) => {
+  const b = e.target.closest(".tv-chan");
+  if (!b) return;
+  for (const c of el("channels").children) {
+    c.classList.toggle("is-on", c === b);
+    c.setAttribute("aria-pressed", String(c === b));
+  }
+});

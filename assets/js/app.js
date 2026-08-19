@@ -70,11 +70,22 @@ function romNote(game) {
   if (isHomebrew(game)) {
     return "ROM свободно распространяется автором. Источники — в разделе «Откуда взялись картриджи».";
   }
-  return "Картриджа нет: ROM этой игры защищён авторским правом, и в комплект он не входит. "
-    + "Если она у вас есть на диске — перетащите файл на страницу, и телевизор её запустит.";
+  return "ROM этой игры защищён авторским правом и в комплект не входит. Но если он у вас есть — "
+    + "положите его в папку roms/ под именем из строки «Файл», и игра станет запускаться с полки. "
+    + "Разовый вариант — перетащить файл на страницу.";
 }
 
 const isHomebrew = (game) => Boolean(game.rom || game.cdn || game.dl);
+
+const ROM_EXTS = ["bin", "gen", "md", "smd", "zip"];
+
+/* Имя, под которым сайт ищет картридж классической игры в папке roms/.
+   ROM этих игр не поставляются — но если положить свой файл с таким
+   именем, игра запустится прямо с полки. */
+const romSlug = (game) => game.t.toLowerCase()
+  .replace(/[’'.:,!]/g, "")
+  .replace(/[^a-z0-9]+/g, "-")
+  .replace(/^-|-$/g, "");
 
 /* Сайт живёт в двух режимах: с папкой roms/ рядом и без неё.
    Поэтому наличие картриджа проверяется в момент запуска, а не на вере. */
@@ -92,7 +103,8 @@ async function resolveRom(game, localPath) {
   /* Папку roms/ могли выложить как есть или вложить ещё на уровень
      (так бывает, когда в загрузчик перетаскивают папку целиком).
      Проверяем оба варианта, и только потом уходим на CDN. */
-  const candidates = [local, local && "roms/" + local, game.cdn].filter(Boolean);
+  const named = local ? [local] : ROM_EXTS.map((e) => `roms/${romSlug(game)}.${e}`);
+  const candidates = [...named, ...named.map((p) => "roms/" + p), game.cdn].filter(Boolean);
   for (const url of candidates) {
     if (await fileExists(url)) return url;
   }
@@ -104,12 +116,21 @@ function showDownloadPrompt(game) {
   const actions = viewDetail.querySelector(".detail-actions");
   const note = viewDetail.querySelector(".detail-note");
   if (!actions) return;
-  actions.innerHTML = game.dl
-    ? `<a class="screen-btn screen-btn-primary" href="${escapeHtml(game.dl)}" download>СКАЧАТЬ КАРТРИДЖ</a>`
-    : `<a class="screen-btn" href="${escapeHtml(game.src || "#")}" target="_blank" rel="noopener">СТРАНИЦА ПРОЕКТА</a>`;
+  if (isHomebrew(game)) {
+    actions.innerHTML = game.dl
+      ? `<a class="screen-btn screen-btn-primary" href="${escapeHtml(game.dl)}" download>СКАЧАТЬ КАРТРИДЖ</a>`
+      : `<a class="screen-btn" href="${escapeHtml(game.src || "#")}" target="_blank" rel="noopener">СТРАНИЦА ПРОЕКТА</a>`;
+    if (note) {
+      note.textContent = "Картридж лежит у автора, а не на этом сайте. Скачайте файл и перетащите "
+        + "его на страницу — телевизор запустит его сразу.";
+    }
+    return;
+  }
+  actions.innerHTML = '<button class="screen-btn" data-act="own">ВЫБРАТЬ ФАЙЛ</button>';
   if (note) {
-    note.textContent = "Картридж лежит у автора, а не на этом сайте. Скачайте файл и перетащите "
-      + "его на страницу — телевизор запустит его сразу.";
+    note.textContent = `Слот пуст. Положите свой картридж в roms/${romSlug(game)}.bin `
+      + "(или .gen, .md, .smd, .zip) — и игра запустится прямо с полки. "
+      + "Либо выберите файл вручную, он никуда не отправляется.";
   }
 }
 
@@ -124,28 +145,30 @@ function renderDetail(game) {
       <dt>СТУДИЯ</dt><dd>${escapeHtml(game.d)}</dd>
       <dt>ИЗДАТЕЛЬ</dt><dd>${escapeHtml(game.p)}</dd>
       <dt>ИГРОКОВ</dt><dd>${game.n}</dd>
+      ${playable ? "" : `<dt>ФАЙЛ</dt><dd>roms/${romSlug(game)}.bin</dd>`}
     </dl>
     <p class="detail-text">${escapeHtml(game.s)}</p>
     <div class="detail-actions">
-      ${playable ? '<button class="screen-btn screen-btn-primary" data-act="play">ИГРАТЬ</button>' : ""}
-      ${playable && game.alt ? altButtons(game) : ""}
-      ${playable ? "" : '<button class="screen-btn" data-act="own">СВОЙ КАРТРИДЖ</button>'}
+      <button class="screen-btn screen-btn-primary" data-act="play">ИГРАТЬ</button>
+      ${game.alt ? altButtons(game) : ""}
     </div>
     <p class="detail-note">${escapeHtml(romNote(game))}</p>
   `;
-  viewDetail.querySelectorAll("[data-act]").forEach((b) => {
-    b.addEventListener("click", async () => {
-      if (b.dataset.act === "own") { fileInput.click(); return; }
-      const wanted = b.dataset.act === "alt" ? b.dataset.rom : game.rom;
-      const label = b.dataset.act === "alt" ? `${game.t} (${b.dataset.lang})` : game.t;
-      b.disabled = true;
-      const source = await resolveRom(game, wanted);
-      b.disabled = false;
-      if (source) playRom(source, label);
-      else showDownloadPrompt(game);
-    });
-  });
 }
+
+/* Обработчик один на весь экран: карточка перерисовывается часто. */
+viewDetail.addEventListener("click", async (b_) => {
+  const b = b_.target.closest("[data-act]");
+  if (!b || !activeGame) return;
+  if (b.dataset.act === "own") { fileInput.click(); return; }
+  const alt = b.dataset.act === "alt";
+  const label = alt ? `${activeGame.t} (${b.dataset.lang})` : activeGame.t;
+  b.disabled = true;
+  const source = await resolveRom(activeGame, alt ? b.dataset.rom : null);
+  b.disabled = false;
+  if (source) playRom(source, label);
+  else showDownloadPrompt(activeGame);
+});
 
 function altButtons(game) {
   return Object.entries(game.alt)

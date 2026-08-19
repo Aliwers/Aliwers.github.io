@@ -7,8 +7,8 @@
 :root {
   --void: #05070a;
   --room: #0b0d11;
-  --case: #17191d;
-  --case-lit: #33373d;
+  --case: #241d18;
+  --case-lit: #4a4038;
   --phos: #8ef7c4;
   --red: #ff2f38;
   --blue: #2f6fe4;
@@ -22,7 +22,7 @@
   --font-screen: "Press Start 2P", "Courier New", monospace;
 
   --shell: min(100% - 2.4rem, 76rem);
-  --tv-w: min(100% - 2.4rem, 46rem, calc(104vh - 90px));
+  --tv-w: min(100% - 2.4rem, 46rem, calc(120vh - 90px));
 
   --noise-tex: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
 }
@@ -535,7 +535,6 @@ body::after {
 @media (max-width: 40rem) {
   .tv { padding: 1.1rem 1.1rem 0.8rem; border-radius: 1.2rem; }
   .screen { box-shadow: inset 0 0 0 2px #05060a, inset 0 0 1.6rem 0.7rem rgb(0 0 0 / 0.95), 0 0 0 0.4rem #101317, 0 0 0 0.55rem #292d33; }
-  .tv-knob, .tv-brand { display: none; }
   .grid { grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); }
   .shelf { border-radius: 0 0 0.6rem 0.6rem; }
   /* на узком экране кнопки должны делить одну строку, а не вставать столбиком */

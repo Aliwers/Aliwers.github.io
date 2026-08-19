@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 480" fill="none" role="img">
+<title>Серый персидский кот, волнистый попугай в клетке и домашние цветы</title>
+<defs>
+  <linearGradient id="furG" x1=".2" y1="0" x2=".9" y2="1">
+    <stop offset="0" stop-color="#8f97a3"/><stop offset=".55" stop-color="#6a7079"/><stop offset="1" stop-color="#41464e"/>
+  </linearGradient>
+  <linearGradient id="bellyG" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#b9c0c9"/><stop offset="1" stop-color="#7d848d"/>
+  </linearGradient>
+  <linearGradient id="potG" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#8d4a28"/><stop offset=".55" stop-color="#b26437"/><stop offset="1" stop-color="#6d3720"/>
+  </linearGradient>
+  <radialGradient id="shadowG" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#000" stop-opacity=".7"/><stop offset="1" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="eyeG" cx=".4" cy=".35" r=".7">
+    <stop offset="0" stop-color="#d6ffbe"/><stop offset="1" stop-color="#5fa842"/>
+  </radialGradient>
+</defs>
+
+<ellipse cx="210" cy="452" rx="150" ry="28" fill="url(#shadowG)"/>
+<ellipse cx="452" cy="462" rx="120" ry="20" fill="url(#shadowG)"/>
+<ellipse cx="66" cy="458" rx="66" ry="16" fill="url(#shadowG)"/>
+
+<!-- Полка с традесканцией: плети свисают до самого пола -->
+<g transform="translate(6 40)">
+  <rect x="0" y="150" width="132" height="10" rx="3" fill="#3b2a1c"/>
+  <path d="M26 150 V126 Q26 112 44 112 H88 Q106 112 106 126 V150 Z" fill="#7d5233"/>
+  <path d="M26 132 H106" stroke="#a06a41" stroke-width="4" opacity=".7"/>
+  <g stroke="#3f6b3c" stroke-width="3" fill="none">
+    <path d="M40 118 Q22 168 34 214 Q44 252 30 292"/>
+    <path d="M66 116 Q60 170 74 216 Q86 258 70 300"/>
+    <path d="M92 118 Q108 162 96 206 Q84 246 100 284"/>
+  </g>
+  <g fill="#5c9a52">
+    <ellipse cx="28" cy="156" rx="11" ry="7" transform="rotate(-24 28 156)"/>
+    <ellipse cx="38" cy="192" rx="11" ry="7" transform="rotate(16 38 192)"/>
+    <ellipse cx="30" cy="232" rx="11" ry="7" transform="rotate(-18 30 232)"/>
+    <ellipse cx="36" cy="272" rx="10" ry="6" transform="rotate(12 36 272)"/>
+    <ellipse cx="64" cy="150" rx="11" ry="7" transform="rotate(18 64 150)"/>
+    <ellipse cx="72" cy="192" rx="11" ry="7" transform="rotate(-14 72 192)"/>
+    <ellipse cx="82" cy="236" rx="11" ry="7" transform="rotate(20 82 236)"/>
+    <ellipse cx="72" cy="286" rx="10" ry="6" transform="rotate(-10 72 286)"/>
+    <ellipse cx="102" cy="146" rx="11" ry="7" transform="rotate(-20 102 146)"/>
+    <ellipse cx="98" cy="186" rx="11" ry="7" transform="rotate(14 98 186)"/>
+    <ellipse cx="88" cy="226" rx="10" ry="6" transform="rotate(-16 88 226)"/>
+    <ellipse cx="100" cy="270" rx="10" ry="6" transform="rotate(18 100 270)"/>
+  </g>
+</g>
+
+<!-- Алоэ: то самое, которым лечили всё -->
+<g transform="translate(14 356)">
+  <path d="M10 30 H94 L86 100 Q84 108 74 108 H30 Q20 108 18 100 Z" fill="url(#potG)"/>
+  <path d="M4 22 H100 Q106 22 106 30 V42 Q106 48 100 48 H4 Q-2 48 -2 42 V30 Q-2 22 4 22 Z" fill="#a75c31"/>
+  <g fill="#48753f">
+    <path d="M52 26 Q40 -34 16 -60 Q34 -30 40 26 Z"/>
+    <path d="M52 26 Q56 -46 74 -74 Q66 -34 62 26 Z"/>
+    <path d="M52 26 Q30 -8 4 -18 Q30 4 44 28 Z"/>
+    <path d="M52 26 Q78 -6 102 -12 Q76 6 62 28 Z"/>
+    <path d="M52 26 Q52 -22 50 -50 Q58 -20 58 26 Z"/>
+  </g>
+  <g fill="#6ea45f" opacity=".8">
+    <path d="M52 26 Q44 -20 30 -44 Q46 -18 50 26 Z"/>
+    <path d="M52 26 Q66 -12 84 -34 Q66 -6 60 26 Z"/>
+  </g>
+</g>
+
+<!-- Кот: спит сидя, ухом ловит заставку -->
+<g transform="translate(120 250)">
+  <!-- хвост обёрнут вокруг лап -->
+  <path d="M22 186 Q-24 190 -16 160 Q-8 134 24 140 Q4 150 6 164 Q8 178 40 176 Z" fill="#5b616a"/>
+  <!-- корпус -->
+  <path d="M92 44 Q150 60 162 130 Q172 190 92 196 Q12 190 22 130 Q34 60 92 44 Z" fill="url(#furG)"/>
+  <path d="M92 96 Q124 108 126 148 Q128 184 92 190 Q56 184 58 148 Q60 108 92 96 Z" fill="url(#bellyG)" opacity=".85"/>
+  <!-- лапки -->
+  <ellipse cx="66" cy="188" rx="22" ry="11" fill="#a4abb5"/>
+  <ellipse cx="116" cy="188" rx="22" ry="11" fill="#9aa1ab"/>
+  <g stroke="#5b616a" stroke-width="1.6" opacity=".7">
+    <path d="M58 184v8M66 183v9M74 184v8M108 184v8M116 183v9M124 184v8"/>
+  </g>
+  <!-- голова: приплюснутая морда персидского -->
+  <path d="M46 24 Q40 -6 58 2 Q70 8 78 16 Z" fill="#6a7079"/>
+  <path d="M138 24 Q144 -6 126 2 Q114 8 106 16 Z" fill="#6a7079"/>
+  <path d="M52 20 Q50 4 60 10 Q68 14 72 20 Z" fill="#c99aa4" opacity=".7"/>
+  <path d="M132 20 Q134 4 124 10 Q116 14 112 20 Z" fill="#c99aa4" opacity=".7"/>
+  <ellipse cx="92" cy="58" rx="58" ry="50" fill="url(#furG)"/>
+  <ellipse cx="66" cy="76" rx="22" ry="18" fill="#aab1bb" opacity=".9"/>
+  <ellipse cx="118" cy="76" rx="22" ry="18" fill="#aab1bb" opacity=".9"/>
+  <!-- глаза светятся отражением экрана -->
+  <ellipse cx="70" cy="52" rx="13" ry="12" fill="url(#eyeG)"/>
+  <ellipse cx="114" cy="52" rx="13" ry="12" fill="url(#eyeG)"/>
+  <ellipse cx="70" cy="52" rx="4" ry="10" fill="#12180f"/>
+  <ellipse cx="114" cy="52" rx="4" ry="10" fill="#12180f"/>
+  <circle cx="66" cy="47" r="3" fill="#fff" opacity=".85"/>
+  <circle cx="110" cy="47" r="3" fill="#fff" opacity=".85"/>
+  <path d="M86 68 H98 L92 76 Z" fill="#c9808f"/>
+  <path d="M92 76 Q92 84 82 84 M92 76 Q92 84 102 84" stroke="#4a5058" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <g stroke="#c9ccd4" stroke-width="1.6" opacity=".55" stroke-linecap="round">
+    <path d="M50 68 L8 58M50 76 L10 76M50 84 L12 94M134 68 L176 58M134 76 L174 76M134 84 L172 94"/>
+  </g>
+  <!-- пушистый контур -->
+  <g stroke="#b9c0c9" stroke-width="1.4" opacity=".35" fill="none">
+    <path d="M34 96 q-8 6-6 14M150 96 q8 6 6 14M24 140 q-9 4-9 12M160 140 q9 4 9 12"/>
+  </g>
+</g>
+
+<!-- Клетка на подставке: волнистый попугай, голубой -->
+<g transform="translate(330 0)">
+  <!-- подставка -->
+  <g stroke="#3a4048" stroke-width="7" stroke-linecap="round">
+    <path d="M132 300 V430"/>
+    <path d="M132 430 L84 462M132 430 L180 462M132 430 L132 466"/>
+  </g>
+  <ellipse cx="132" cy="466" rx="54" ry="9" fill="#2a2f36"/>
+  <!-- поддон -->
+  <path d="M46 292 H218 Q226 292 226 300 V312 Q226 320 218 320 H46 Q38 320 38 312 V300 Q38 292 46 292 Z" fill="#2f353d"/>
+  <!-- прутья -->
+  <g stroke="#7c848f" stroke-width="2.6" opacity=".92">
+    <path d="M50 292 V150M66 292 V138M82 292 V130M98 292 V126M114 292 V124M132 292 V124M150 292 V126M166 292 V130M182 292 V138M198 292 V150M214 292 V162"/>
+    <path d="M46 150 Q132 96 218 162" fill="none"/>
+    <path d="M46 200 H218M46 250 H218M46 292 H218"/>
+    <path d="M132 96 V72"/>
+  </g>
+  <circle cx="132" cy="64" r="11" fill="none" stroke="#7c848f" stroke-width="3"/>
+  <!-- жёрдочка и качели -->
+  <path d="M60 224 H204" stroke="#8a5a33" stroke-width="6" stroke-linecap="round"/>
+  <g stroke="#7c848f" stroke-width="2" fill="none"><path d="M168 156 L176 190M196 156 L188 190"/></g>
+  <path d="M172 190 H192" stroke="#8a5a33" stroke-width="4" stroke-linecap="round"/>
+  <!-- попугай -->
+  <g transform="translate(86 158)">
+    <path d="M30 40 Q6 46 8 68 Q10 92 34 92 Q56 92 58 68 Q60 46 38 40 Z" fill="#5cb8ee"/>
+    <path d="M38 44 Q64 54 62 80 Q60 100 44 104 Q52 84 48 66 Q44 50 34 44 Z" fill="#3f9ad4"/>
+    <g stroke="#12212c" stroke-width="2" opacity=".75" fill="none">
+      <path d="M42 56 q10 4 14 12M40 66 q12 4 16 12M40 78 q11 4 14 10"/>
+    </g>
+    <path d="M46 96 Q58 130 52 158 Q44 132 38 100 Z" fill="#4aa7dd"/>
+    <ellipse cx="30" cy="26" rx="22" ry="21" fill="#eaf4fb"/>
+    <g stroke="#22303a" stroke-width="1.7" opacity=".7" fill="none">
+      <path d="M16 14 q14-4 28 0M14 20 q16-4 32 0M16 27 q14-4 28 0"/>
+    </g>
+    <circle cx="22" cy="28" r="4.6" fill="#141a20"/>
+    <circle cx="20.6" cy="26.6" r="1.5" fill="#fff"/>
+    <path d="M10 30 Q2 34 10 40 Q16 44 18 36 Z" fill="#d9d2c4"/>
+    <path d="M14 12 Q22 6 30 10 Q22 12 16 16 Z" fill="#4f7fd0"/>
+    <circle cx="18" cy="42" r="5" fill="#5b8ed8" opacity=".8"/>
+    <g stroke="#c9a24a" stroke-width="2.6" stroke-linecap="round"><path d="M28 88 v10M40 88 v10"/></g>
+  </g>
+  <!-- поилка и зеркальце -->
+  <rect x="52" y="252" width="22" height="32" rx="4" fill="#c8d6e4" opacity=".55"/>
+  <circle cx="196" cy="252" r="12" fill="#dfe6ee" opacity=".5"/>
+  <!-- свет телевизора на прутьях -->
+  <path d="M46 150 Q132 96 218 162" stroke="#8ef7c4" stroke-width="2" opacity=".35" fill="none"/>
+</g>
+
+<!-- Герань в горшке на табуретке -->
+<g transform="translate(452 330)">
+  <path d="M-30 92 H86 V102 H-30 Z" fill="#5a3b22"/>
+  <g stroke="#5a3b22" stroke-width="7" stroke-linecap="round"><path d="M-18 102 V132M74 102 V132"/></g>
+  <path d="M2 40 H62 L54 92 Q52 98 44 98 H20 Q12 98 10 92 Z" fill="url(#potG)"/>
+  <path d="M-4 32 H68 Q74 32 74 38 V48 Q74 54 68 54 H-4 Q-10 54 -10 48 V38 Q-10 32 -4 32 Z" fill="#a75c31"/>
+  <g stroke="#3f6b3c" stroke-width="3" fill="none"><path d="M32 36 V4M32 20 Q16 12 6 -2M32 24 Q50 14 60 0"/></g>
+  <g fill="#4e8248">
+    <ellipse cx="6" cy="-6" rx="17" ry="13"/><ellipse cx="60" cy="-4" rx="17" ry="13"/>
+    <ellipse cx="32" cy="6" rx="15" ry="12"/><ellipse cx="18" cy="-24" rx="14" ry="11"/>
+    <ellipse cx="48" cy="-26" rx="14" ry="11"/>
+  </g>
+  <g fill="#d2342f">
+    <circle cx="32" cy="-44" r="7"/><circle cx="24" cy="-38" r="6"/><circle cx="40" cy="-38" r="6"/>
+    <circle cx="32" cy="-33" r="6"/><circle cx="30" cy="-50" r="5"/><circle cx="39" cy="-48" r="5"/>
+  </g>
+  <g fill="#f06a63" opacity=".8"><circle cx="29" cy="-46" r="2.6"/><circle cx="37" cy="-41" r="2.4"/></g>
+</g>
+</svg>

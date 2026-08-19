@@ -83,7 +83,7 @@ const ROM_EXTS = ["bin", "gen", "md", "smd", "zip"];
    ROM этих игр не поставляются — но если положить свой файл с таким
    именем, игра запустится прямо с полки. */
 const romSlug = (game) => game.t.toLowerCase()
-  .replace(/[’'.:,!]/g, "")
+  .replace(/[\u2019'.:,!]/g, "")
   .replace(/[^a-z0-9]+/g, "-")
   .replace(/^-|-$/g, "");
 
@@ -98,14 +98,34 @@ async function fileExists(url) {
   }
 }
 
+/* Папку roms/ могли выложить как есть, вложить ещё на уровень
+   (так бывает, когда в загрузчик перетаскивают папку целиком)
+   или не выложить вовсе. Ищем её один раз за сессию — иначе каждый
+   клик по классической игре перебирает все расширения и сыплет
+   десятком 404 в консоль.
+   Маяк — самый лёгкий картридж, а не CREDITS.md: файл лицензий может
+   лежать уровнем выше самих ROM, и тогда база определится неверно. */
+const ROMS_BEACON = "roms/sega-2048.bin";
+
+let romsBaseProbe = null;
+
+function findRomsBase() {
+  romsBaseProbe ||= (async () => {
+    for (const base of ["", "roms/"]) {
+      if (await fileExists(base + ROMS_BEACON)) return base;
+    }
+    return null;
+  })();
+  return romsBaseProbe;
+}
+
 async function resolveRom(game, localPath) {
   const local = localPath || game.rom;
-  /* Папку roms/ могли выложить как есть или вложить ещё на уровень
-     (так бывает, когда в загрузчик перетаскивают папку целиком).
-     Проверяем оба варианта, и только потом уходим на CDN. */
-  const named = local ? [local] : ROM_EXTS.map((e) => `roms/${romSlug(game)}.${e}`);
-  const candidates = [...named, ...named.map((p) => "roms/" + p), game.cdn].filter(Boolean);
-  for (const url of candidates) {
+  const base = await findRomsBase();
+  const named = base === null
+    ? []
+    : (local ? [local] : ROM_EXTS.map((e) => `roms/${romSlug(game)}.${e}`)).map((p) => base + p);
+  for (const url of [...named, game.cdn].filter(Boolean)) {
     if (await fileExists(url)) return url;
   }
   return null;

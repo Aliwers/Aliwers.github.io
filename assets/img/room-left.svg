@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 440" fill="none" role="img">
+<title>Приставка Sega Mega Drive II на полу, джойстики и картриджи</title>
+<defs>
+  <linearGradient id="caseTop" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#31363d"/><stop offset="1" stop-color="#15181c"/>
+  </linearGradient>
+  <linearGradient id="caseFront" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#1c2026"/><stop offset="1" stop-color="#0b0d10"/>
+  </linearGradient>
+  <linearGradient id="padTop" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#262b31"/><stop offset="1" stop-color="#101317"/>
+  </linearGradient>
+  <radialGradient id="floorShadow" cx=".5" cy=".5" r=".5">
+    <stop offset="0" stop-color="#000" stop-opacity=".72"/>
+    <stop offset="1" stop-color="#000" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<ellipse cx="290" cy="392" rx="235" ry="42" fill="url(#floorShadow)"/>
+<ellipse cx="105" cy="330" rx="88" ry="24" fill="url(#floorShadow)"/>
+
+<!-- Стопка картриджей: сверху Sonic, под ним всё остальное -->
+<g transform="translate(28 232)">
+  <g>
+    <path d="M4 84 H150 L158 100 H12 Z" fill="#0f1216"/>
+    <rect x="6" y="60" width="148" height="26" rx="4" fill="#191d22"/>
+    <rect x="18" y="64" width="92" height="18" rx="2" fill="#9e2b28"/>
+    <rect x="22" y="67" width="84" height="12" rx="1" fill="#e8e2d4" opacity=".85"/>
+  </g>
+  <g>
+    <rect x="2" y="36" width="150" height="26" rx="4" fill="#16191e"/>
+    <rect x="14" y="40" width="94" height="18" rx="2" fill="#2d4a78"/>
+    <rect x="18" y="43" width="86" height="12" rx="1" fill="#dfe3ea" opacity=".8"/>
+  </g>
+  <g transform="rotate(-2 78 26)">
+    <rect x="0" y="12" width="152" height="26" rx="4" fill="#191d22"/>
+    <rect x="12" y="16" width="96" height="18" rx="2" fill="#b08a3c"/>
+    <rect x="16" y="19" width="88" height="12" rx="1" fill="#2a2119" opacity=".7"/>
+  </g>
+  <g transform="rotate(3 78 4)">
+    <rect x="4" y="-10" width="148" height="26" rx="4" fill="#1d2127"/>
+    <rect x="16" y="-6" width="92" height="18" rx="2" fill="#3d6b45"/>
+    <rect x="20" y="-3" width="84" height="12" rx="1" fill="#e8e2d4" opacity=".8"/>
+    <path d="M4 -10 H152" stroke="#8ef7c4" stroke-width="2" opacity=".35"/>
+  </g>
+</g>
+
+<!-- Приставка -->
+<g>
+  <!-- корпус -->
+  <path d="M186 246 H382 Q404 246 412 262 L430 300 Q436 312 422 312 H154 Q140 312 146 300 L164 262 Q172 246 186 246 Z" fill="url(#caseTop)"/>
+  <path d="M146 306 H430 V336 Q430 350 414 350 H162 Q146 350 146 336 Z" fill="url(#caseFront)"/>
+  <!-- углубление и щель картриджа -->
+  <ellipse cx="288" cy="276" rx="104" ry="27" fill="#0a0c0f"/>
+  <ellipse cx="288" cy="274" rx="98" ry="23" fill="#14171b"/>
+  <rect x="212" y="268" width="152" height="12" rx="3" fill="#05070a"/>
+  <path d="M212 268 H364" stroke="#8ef7c4" stroke-width="1.6" opacity=".28"/>
+  <!-- решётка охлаждения -->
+  <g stroke="#0a0c0f" stroke-width="3" opacity=".9">
+    <path d="M172 258 h34M170 264 h34M168 270 h34M166 276 h34"/>
+  </g>
+  <!-- кнопки power и reset, между ними индикатор -->
+  <rect x="176" y="316" width="62" height="16" rx="6" fill="#c8161d"/>
+  <rect x="176" y="316" width="62" height="7" rx="4" fill="#ff5a60" opacity=".7"/>
+  <rect x="336" y="316" width="62" height="16" rx="6" fill="#c8161d"/>
+  <rect x="336" y="316" width="62" height="7" rx="4" fill="#ff5a60" opacity=".7"/>
+  <g fill="#2b3138"><rect x="272" y="318" width="4" height="12"/><rect x="282" y="318" width="4" height="12"/><rect x="292" y="318" width="4" height="12"/></g>
+  <text x="176" y="346" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#6f7883" letter-spacing="1">16-BIT</text>
+  <text x="342" y="346" font-family="Arial, sans-serif" font-size="9" font-weight="700" fill="#6f7883" letter-spacing=".5">MEGA DRIVE II</text>
+  <!-- свет телевизора по правой кромке -->
+  <path d="M382 246 Q404 246 412 262 L430 300 Q436 312 422 312" stroke="#8ef7c4" stroke-width="2.4" opacity=".4" fill="none"/>
+</g>
+
+<!-- Провода: питание уходит за кадр, джойстики тянутся к телевизору -->
+<g stroke="#0d1014" stroke-width="7" stroke-linecap="round" fill="none">
+  <path d="M150 344 Q60 372 96 404 Q132 432 8 424"/>
+  <path d="M424 340 Q470 366 432 392 Q392 418 460 436"/>
+  <path d="M300 350 Q296 384 336 396"/>
+</g>
+<g stroke="#333a42" stroke-width="2" stroke-linecap="round" fill="none" opacity=".6">
+  <path d="M150 344 Q60 372 96 404 Q132 432 8 424"/>
+  <path d="M424 340 Q470 366 432 392 Q392 418 460 436"/>
+</g>
+
+<!-- Джойстик: три кнопки, START, крестовина -->
+<g transform="translate(300 372) rotate(-9)">
+  <path d="M14 0 H132 Q158 0 162 22 Q166 46 138 50 H8 Q-18 46 -14 22 Q-10 0 14 0 Z" fill="url(#padTop)"/>
+  <path d="M14 0 H132 Q158 0 162 22" stroke="#8ef7c4" stroke-width="2" opacity=".35" fill="none"/>
+  <g fill="#0a0c0f">
+    <rect x="16" y="14" width="34" height="11" rx="2"/>
+    <rect x="27.5" y="2.5" width="11" height="34" rx="2"/>
+  </g>
+  <g fill="#c8161d"><circle cx="96" cy="26" r="9"/><circle cx="118" cy="20" r="9"/><circle cx="140" cy="15" r="9"/></g>
+  <rect x="60" y="30" width="26" height="7" rx="3.5" fill="#0a0c0f"/>
+</g>
+
+<!-- Пара картриджей, брошенных рядом -->
+<g transform="translate(430 300) rotate(14)">
+  <rect x="0" y="0" width="130" height="24" rx="4" fill="#181c21"/>
+  <rect x="12" y="4" width="80" height="16" rx="2" fill="#5b4076"/>
+  <rect x="15" y="7" width="74" height="10" rx="1" fill="#e8e2d4" opacity=".8"/>
+</g>
+<g transform="translate(122 348) rotate(-6)">
+  <rect x="0" y="0" width="128" height="24" rx="4" fill="#14181d"/>
+  <rect x="11" y="4" width="78" height="16" rx="2" fill="#2f6478"/>
+  <rect x="14" y="7" width="72" height="10" rx="1" fill="#e8e2d4" opacity=".75"/>
+</g>
+</svg>

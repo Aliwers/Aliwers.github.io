@@ -132,8 +132,92 @@ body::after {
 
 .theatre {
   position: relative;
+  padding-top: clamp(0.5rem, 3vw, 2.5rem);
   padding-bottom: clamp(2rem, 5vw, 3.5rem);
+  isolation: isolate;
 }
+
+/* --- Комната вокруг телевизора ------------------------------ */
+/* Квартира начала девяностых: обои в мелкий цветочек, ковёр на стене,
+   паркет и всё хозяйство на полу. Слой чисто декоративный — клики
+   проходят насквозь, на узком экране боковины уходят. */
+
+.room {
+  --floor: 27%;
+  position: absolute;
+  inset: -1.5rem 0 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  background: radial-gradient(120% 78% at 50% 0%, #2a2118 0%, #1a150f 58%, #0b0a08 100%);
+  transition: filter 700ms ease;
+}
+
+/* Обои: мелкий цветочек по всей стене, как в каждой второй квартире */
+.room::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 var(--floor);
+  opacity: 0.42;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cg fill='%23574026'%3E%3Cg transform='translate(18 18)'%3E%3Cellipse cx='0' cy='-7' rx='3' ry='5'/%3E%3Cellipse cx='0' cy='7' rx='3' ry='5'/%3E%3Cellipse cx='-7' cy='0' rx='5' ry='3'/%3E%3Cellipse cx='7' cy='0' rx='5' ry='3'/%3E%3Ccircle cx='0' cy='0' r='2.6' fill='%237a5a33'/%3E%3C/g%3E%3Cg transform='translate(54 54)'%3E%3Cellipse cx='0' cy='-7' rx='3' ry='5'/%3E%3Cellipse cx='0' cy='7' rx='3' ry='5'/%3E%3Cellipse cx='-7' cy='0' rx='5' ry='3'/%3E%3Cellipse cx='7' cy='0' rx='5' ry='3'/%3E%3Ccircle cx='0' cy='0' r='2.6' fill='%237a5a33'/%3E%3C/g%3E%3Cg fill='%234a3620'%3E%3Ccircle cx='54' cy='18' r='2.4'/%3E%3Ccircle cx='18' cy='54' r='2.4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 72px 72px;
+}
+
+/* Паркет и плинтус */
+.room::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--floor);
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.6) 0%, transparent 26%),
+    repeating-linear-gradient(97deg, #2a1e14 0 38px, #211710 38px 76px),
+    linear-gradient(180deg, #2e2117, #14100c);
+  box-shadow: inset 0 7px 0 #382a1c, inset 0 9px 0 #0b0907;
+}
+
+/* Мебель и живность стоят на полу, а не под ним.
+   Размеры задают правила ниже — здесь их нет намеренно,
+   иначе они перебивают их по специфичности. */
+.room img {
+  position: absolute;
+  z-index: 1;
+}
+
+/* Ковёр над телевизором — на четырёх гвоздях, слегка провис */
+.room-wall {
+  top: 0;
+  left: 50%;
+  height: calc(100% - var(--floor));
+  width: auto;
+  max-width: none;
+  transform: translateX(-50%);
+  opacity: 0.92;
+}
+
+.room-side {
+  bottom: 1.5%;
+  height: clamp(10rem, 25vh, 19rem);
+  width: auto;
+}
+
+.room-left { left: clamp(-2rem, -1vw, 0rem); }
+.room-right { right: clamp(-2rem, -1vw, 0rem); }
+
+/* Телевизор включили — комната ожила */
+.theatre:has(.tv.is-on) .room { filter: brightness(1.22) saturate(1.06); }
+
+/* Узкий экран: остаются ковёр, обои и пол, хозяйство по бокам убирается */
+@media (max-width: 1180px) {
+  .room-side { display: none; }
+  .room { --floor: 20%; }
+}
+
+/* Всё, что стоит в комнате, — поверх неё */
+.theatre > :not(.room) { position: relative; z-index: 1; }
 
 /* Полка под телевизором со слотом картриджа */
 .shelf {

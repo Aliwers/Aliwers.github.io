@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 520" fill="none" role="img">
+<title>Ковёр на стене, фотография в рамке и настенные часы</title>
+<defs>
+  <!-- Ромбовый орнамент — тот самый ковёр, что висел над диваном -->
+  <pattern id="rugRow" width="150" height="104" patternUnits="userSpaceOnUse">
+    <path d="M75 4 141 52 75 100 9 52Z" fill="#7a2c1d"/>
+    <path d="M75 18 118 52 75 86 32 52Z" fill="#a4472a"/>
+    <path d="M75 36 96 52 75 68 54 52Z" fill="#d59a4e"/>
+    <path d="M0 52 9 52 0 62Z M150 52 141 52 150 62Z" fill="#8e3a24"/>
+  </pattern>
+  <pattern id="rugBorder" width="46" height="46" patternUnits="userSpaceOnUse">
+    <rect width="46" height="46" fill="#5d2015"/>
+    <path d="M23 8 38 23 23 38 8 23Z" fill="#c98a3f"/>
+    <path d="M23 16 30 23 23 30 16 23Z" fill="#5d2015"/>
+  </pattern>
+  <linearGradient id="rugShade" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#000" stop-opacity=".62"/>
+    <stop offset=".42" stop-color="#000" stop-opacity=".08"/>
+    <stop offset="1" stop-color="#000" stop-opacity=".55"/>
+  </linearGradient>
+  <radialGradient id="tvSpill" cx=".5" cy=".78" r=".62">
+    <stop offset="0" stop-color="#8ef7c4" stop-opacity=".16"/>
+    <stop offset="1" stop-color="#8ef7c4" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<!-- Ковёр 3×4, гвоздями к стене -->
+<g transform="translate(170 34)">
+  <rect x="0" y="0" width="900" height="424" rx="4" fill="#61221a"/>
+  <rect x="0" y="0" width="900" height="424" fill="url(#rugRow)" opacity=".95"/>
+  <rect x="0" y="0" width="900" height="52" fill="url(#rugBorder)"/>
+  <rect x="0" y="372" width="900" height="52" fill="url(#rugBorder)"/>
+  <rect x="0" y="0" width="52" height="424" fill="url(#rugBorder)"/>
+  <rect x="848" y="0" width="52" height="424" fill="url(#rugBorder)"/>
+  <rect x="52" y="52" width="796" height="320" fill="none" stroke="#d59a4e" stroke-width="3" opacity=".55"/>
+  <rect x="0" y="0" width="900" height="424" fill="url(#rugShade)"/>
+  <!-- провис по верхнему краю: ковёр держится на четырёх гвоздях -->
+  <path d="M0 0 Q225 26 450 14 Q675 2 900 0 L900 -14 L0 -14Z" fill="#0b0d11"/>
+  <g fill="#c9ccd4" opacity=".5">
+    <circle cx="26" cy="10" r="4"/><circle cx="450" cy="20" r="4"/><circle cx="874" cy="10" r="4"/>
+  </g>
+  <!-- бахрома понизу -->
+  <g stroke="#8b6a3a" stroke-width="2" opacity=".5">
+    <path d="M40 424v14M80 424v12M120 424v15M160 424v12M200 424v14M240 424v12M280 424v15M320 424v12M360 424v14M400 424v13M440 424v15M480 424v12M520 424v14M424 424v12M600 424v15M640 424v13M680 424v14M720 424v12M760 424v15M800 424v13M840 424v14"/>
+  </g>
+</g>
+
+<!-- Фотография в рамке: свадебная, чёрно-белая, как у всех -->
+<g transform="translate(16 150)">
+  <rect x="0" y="0" width="150" height="190" rx="3" fill="#3b2a1c" stroke="#5a4229" stroke-width="4"/>
+  <rect x="14" y="14" width="122" height="162" fill="#171a1f"/>
+  <rect x="14" y="14" width="122" height="162" fill="#8ef7c4" opacity=".05"/>
+  <g fill="#2c333c">
+    <circle cx="56" cy="70" r="20"/><path d="M28 176v-52q0-26 28-26t28 26v52Z"/>
+    <circle cx="98" cy="74" r="17"/><path d="M74 176v-46q0-22 24-22t24 22v46Z"/>
+  </g>
+  <path d="M14 14 136 176" stroke="#fff" stroke-width="10" opacity=".05"/>
+</g>
+
+<!-- Настенные часы: половина одиннадцатого, пора спать, а тут Sonic -->
+<g transform="translate(1100 150)">
+  <circle cx="60" cy="60" r="60" fill="#221a13"/>
+  <circle cx="60" cy="60" r="52" fill="#e6dcc8" opacity=".82"/>
+  <g stroke="#2a2119" stroke-width="3" stroke-linecap="round">
+    <path d="M60 18v8M102 60h-8M60 102v-8M18 60h8"/>
+    <path d="M60 60 60 30" stroke-width="4"/>
+    <path d="M60 60 84 72"/>
+  </g>
+  <circle cx="60" cy="60" r="4" fill="#c8161d"/>
+</g>
+
+<!-- Свет от телевизора, растёкшийся по ковру -->
+<rect x="0" y="0" width="1240" height="520" fill="url(#tvSpill)"/>
+</svg>

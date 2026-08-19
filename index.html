@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Press+Start+2P&family=Russo+One&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/crt.css">
+<link rel="stylesheet" href="assets/css/main.css?v=2">
+<link rel="stylesheet" href="assets/css/crt.css?v=2">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%2317191d'/%3E%3Crect x='5' y='9' width='22' height='15' rx='2' fill='%238ef7c4'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -55,16 +55,27 @@
         <p class="channel-badge" id="channel" aria-hidden="true">CH 00</p>
       </div>
 
-      <div class="tv-panel">
-        <span class="tv-brand" aria-hidden="true">МЕГА<b>ВИЗОР</b> 21"</span>
-        <div class="tv-speaker" aria-hidden="true"></div>
-        <div class="tv-knob" aria-hidden="true"></div>
-        <div class="tv-knob" aria-hidden="true"></div>
-        <span class="tv-led" aria-hidden="true"></span>
-        <button class="tv-power" id="power" type="button" aria-pressed="false">
-          <span aria-hidden="true">⏻</span>
-          <span class="visually-hidden">Включить или выключить телевизор</span>
-        </button>
+      <div class="tv-side">
+        <div class="tv-vents" aria-hidden="true"></div>
+
+        <div class="tv-channels" id="channels" role="group" aria-label="Переключатель каналов">
+          <button type="button" class="tv-chan is-on" aria-pressed="true"><span>1</span></button>
+          <button type="button" class="tv-chan" aria-pressed="false"><span>2</span></button>
+          <button type="button" class="tv-chan" aria-pressed="false"><span>3</span></button>
+          <button type="button" class="tv-chan" aria-pressed="false"><span>4</span></button>
+          <button type="button" class="tv-chan" aria-pressed="false"><span>5</span></button>
+          <button type="button" class="tv-chan" aria-pressed="false"><span>6</span></button>
+        </div>
+
+        <div class="tv-knobs">
+          <span class="tv-knob" aria-hidden="true"></span>
+          <button class="tv-power" id="power" type="button" aria-pressed="false">
+            <span aria-hidden="true">⏻</span>
+            <span class="visually-hidden">Включить или выключить телевизор</span>
+          </button>
+        </div>
+
+        <span class="tv-badge" aria-hidden="true">ФОТОН Ц-276Д</span>
       </div>
     </div>
 
@@ -173,9 +184,9 @@
   </p>
 </footer>
 
-<script src="assets/js/data.js"></script>
-<script src="assets/js/catalog.js"></script>
-<script src="assets/js/art.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/data.js?v=2"></script>
+<script src="assets/js/catalog.js?v=2"></script>
+<script src="assets/js/art.js?v=2"></script>
+<script src="assets/js/app.js?v=2"></script>
 </body>
 </html>

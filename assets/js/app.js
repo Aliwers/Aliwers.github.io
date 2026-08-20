@@ -380,6 +380,24 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+/* --- Клавиши во время игры ----------------------------------- */
+
+/* Пока картридж играет, стрелки и пробел — это геймпад. Фокус может
+   остаться на странице, а не в кадре эмулятора, и тогда браузер
+   проматывает страницу под телевизором. Тот же набор клавиш глушится
+   внутри player.html — это разные документы, общего места для списка нет. */
+const PAD_KEYS = new Set([
+  "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight",
+  "Space", "PageUp", "PageDown", "Home", "End",
+]);
+
+window.addEventListener("keydown", (e) => {
+  if (!PAD_KEYS.has(e.code)) return;
+  if (!viewGame.querySelector("iframe")) return;
+  if (e.target.closest("input, textarea, select, [contenteditable]")) return;
+  e.preventDefault();
+});
+
 /* --- Заставка «нет сигнала» --------------------------------- */
 
 function buildIdleBars() {

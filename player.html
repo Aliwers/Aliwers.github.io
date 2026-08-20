@@ -29,7 +29,7 @@
   } else {
     window.EJS_player = "#game";
     window.EJS_core = "segaMD";
-    window.EJS_pathtodata = "https://cdn.emulatorjs.org/latest/data/";
+    window.EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
     window.EJS_gameUrl = rom;
     window.EJS_gameName = name;
     window.EJS_language = "ru";
@@ -37,15 +37,44 @@
     window.EJS_backgroundColor = "#000000";
     window.EJS_startOnLoaded = true;
     window.EJS_startButtonName = "СТАРТ";
+    /* Без этого EmulatorJS берёт -legacy сборку ядра: в отчёте ядра на CDN
+       поле options пустое, и WebGL2 остаётся выключенным. Там, где WebGL2
+       не поддерживается, эмулятор сам вернётся на legacy. */
+    window.EJS_defaultOptions = { webgl2Enabled: "enabled" };
+
+    /* Сборка stable, а не latest: в ядрах latest не экспортирована
+       EmulatorJSGetState, и сохранение падало с FAILED TO SAVE STATE.
+       Русского словаря в stable нет, поэтому берём его из latest —
+       единственный файл, который подменяется. */
+    const cdnFetch = window.fetch.bind(window);
+    window.fetch = (input, init) => {
+      const url = String(input && input.url ? input.url : input);
+      return url.includes("/stable/data/localization/")
+        ? cdnFetch(url.replace("/stable/", "/latest/"), init)
+        : cdnFetch(input, init);
+    };
 
     const s = document.createElement("script");
-    s.src = "https://cdn.emulatorjs.org/latest/data/loader.js";
+    s.src = "https://cdn.emulatorjs.org/stable/data/loader.js";
     s.onerror = () => {
       document.getElementById("game").innerHTML =
         '<div class="fail">НЕТ СВЯЗИ С CDN<br>эмулятор не загрузился<br>проверьте интернет</div>';
     };
     document.body.appendChild(s);
   }
+
+  /* Стрелки и пробел — это геймпад, а не прокрутка. Страница под iframe
+     не скроллится, поэтому браузер уводил прокрутку на родительскую. */
+  const PAD_KEYS = new Set([
+    "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight",
+    "Space", "PageUp", "PageDown", "Home", "End",
+  ]);
+
+  addEventListener("keydown", (e) => {
+    if (!PAD_KEYS.has(e.code)) return;
+    if (e.target.closest("input, textarea, select, [contenteditable]")) return;
+    e.preventDefault();
+  }, { capture: true });
 </script>
 </body>
 </html>
